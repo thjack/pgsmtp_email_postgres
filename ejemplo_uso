@@ -1,0 +1,16 @@
+-- para crear la extension para postgres
+create extension pgsmtppy3;
+
+-- para quitar la extension de postgres
+drop extension pgsmtppy3;
+
+
+#insert data(user, smtpserver,port,password) datos del usuario que envia en la table pgsmtp.user_smtp_data, esta es requerida para enviar el mail
+
+INSERT INTO pgsmtp.user_smtp_data VALUES ('jvenegas.online@gmail.com','smtp.gmail.com',587,'clave')
+
+--aqui se envia correo y tambien a copias publicas y las copias ocultas
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Test Asunto mas BCC + cuerpo','Cuerpo del Mail from postgres using pgsmtp :D');
+
+--Con esta funcion se puede tambien agregar archivos adjuntos
+select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Test Asunto mas BCC + cuerpo','Cuerpo del Mail from postgres using pgsmtp :D',array['d:/_tabla_periodica.png','d:/_nota_credito.xml']);

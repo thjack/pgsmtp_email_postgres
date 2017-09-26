@@ -1,0 +1,5 @@
+#extesion
+comment = 'Extension para enviar correo por smtp usando plpython 3.x'
+default_version = '0.1.1'
+relocatable = true
+superuser = true
