@@ -1,4 +1,4 @@
---create schema pgsmtp AUTHORIZATION postgres;
+create schema pgsmtp AUTHORIZATION postgres;
 
 
 CREATE TABLE pgsmtp.user_smtp_data
