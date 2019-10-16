@@ -45,4 +45,4 @@ select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmai
 select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Asunto de correo con CC + BCC','Cuerpo de correo con CC + BCC y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
 
 --Mensaje de correo a destinatario(s), copias ocultas y archivos adjuntos
-select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],'Asunto de correo con copia oculta y archivos adjuntos','Cuerpo de correo con copia y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
+select pgsmtp.pg_smtp_mail_attach_hide('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],'Asunto de correo con copia oculta y archivos adjuntos','Cuerpo de correo con copia y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
