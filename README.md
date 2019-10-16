@@ -9,4 +9,4 @@ https://github.com/asotolongo/pgsmtp
 
 La modifique para que funcione con python 3.x especificamente python 3.3 que es el que permite instalar el plpython3u del instalador de 2UDA de 2ndquadrant.
 
-Ver archivo de 
+Ver archivo ejemplos de uso 
