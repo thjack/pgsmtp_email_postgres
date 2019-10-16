@@ -7,10 +7,42 @@ drop extension pgsmtppy3;
 
 #insert data(user, smtpserver,port,password) datos del usuario que envia en la table pgsmtp.user_smtp_data, esta es requerida para enviar el mail
 
+-- Cambiar estos datos con la direccion de correo que vas a probar si tu direccion es de gmail 
+-- antes de probar debes permitir que tu cuenta envie correo desde fuera de gmail
+-- eso lo configuras en tu cuenta de gmail
+
 INSERT INTO pgsmtp.user_smtp_data VALUES ('jvenegas.online@gmail.com','smtp.gmail.com',587,'clave')
 
---aqui se envia correo y tambien a copias publicas y las copias ocultas
-select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Test Asunto mas BCC + cuerpo','Cuerpo del Mail from postgres using pgsmtp :D');
 
---Con esta funcion se puede tambien agregar archivos adjuntos
-select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Test Asunto mas BCC + cuerpo','Cuerpo del Mail from postgres using pgsmtp :D',array['d:/_tabla_periodica.png','d:/_nota_credito.xml']);
+-- ENVIO DE MENSAJES SOLO ASUNTO Y CUERPO 
+
+--Mensaje de correo a destinatario(s) simple 
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com','Asunto correo simple','Cuerpo del Mail simple from postgres using pgsmtp :D');
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com,jvenegas@sedalib.com.pe','Asunto correo simple','Cuerpo del Mail simple from postgres using pgsmtp :D');
+
+--Mensaje de correo a destinatario(s) y copias a otros destinatarios
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],'Asunto correo con copia','Cuerpo de correo con copia from postgres using pgsmtp :D');
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com,jvenegas@sedalib.com.pe',array['karolsdeveloper@gmail.com','jvenegasavb@gmail.com'],'Asunto correo con copia','Cuerpo de correo con copia from postgres using pgsmtp :D');
+
+--Mensaje de correo a destinatario(s) y copia oculta a otros destinatarios
+select pgsmtp.pg_smtp_mail_hide('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],'Asunto de correo con copia oculta','Cuerpo del correo con copia oculta :D');
+
+
+--Mensaje de correo a destinatario(s), copias a otros destinatarios y copias ocultas a otros destinatarios
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Asunto correo con copias y copias ocultas','Cuerpo de correo con copias y copias ocultas :D');
+
+
+-- ENVIO DE MENSAJES ASUNTO, CUERPO Y ARCHIVOS ADJUNTOS
+
+--Mensaje de correo a destinatario(s) simple con archivos adjuntos
+select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com,jvenegas@sedalib.com.pe','Correo simple con archivos adjuntos','Texto del correo con archivo adjunto :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
+
+--Mensaje de correo a destinatario(s), copias a otros destinatarios y archivos adjuntos
+select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],'Asunto de correo con copia y archivos adjuntos','Cuerpo de correo con copia y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
+select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com,jvenegas@sedalib.com.pe',array['karolsdeveloper@gmail.com','jvenegasavb@gmail.com'],'Asunto de correo con copia y archivos adjuntos','Cuerpo de correo con copia y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
+
+--Mensaje de correo a destinatario(s), copias a otros destinatarios y copias ocultas a otros destinatarios con archivos adjuntos
+select pgsmtp.pg_smtp_mail('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],array['jvenegas@sedalib.com.pe'],'Asunto de correo con CC + BCC','Cuerpo de correo con CC + BCC y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
+
+--Mensaje de correo a destinatario(s), copias ocultas y archivos adjuntos
+select pgsmtp.pg_smtp_mail_attach('jvenegas.online@gmail.com','jvenegasperu@gmail.com',array['karolsdeveloper@gmail.com'],'Asunto de correo con copia oculta y archivos adjuntos','Cuerpo de correo con copia y archivos adjuntos :D',array['D:/img_pg_smtp/img_ejemplo.png','D:/img_pg_smtp/postgre2.jpg']);
