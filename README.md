@@ -9,4 +9,6 @@ https://github.com/asotolongo/pgsmtp
 
 La modifique para que funcione con python 3.x especificamente python 3.3 que es el que permite instalar el plpython3u del instalador de 2UDA de 2ndquadrant.
 
+Basicamente la extension deberia funcionar sin problemas en cualquier instalacion de postgres que tenga instalado plpython3u
+
 Ver archivo ejemplos de uso 
